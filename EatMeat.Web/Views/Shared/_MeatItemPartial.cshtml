@@ -1,0 +1,4 @@
+﻿@using EatMeat.Web.Views.Shared.Components.MeatItemComponent
+@using EatMeat.Database.Entities
+@model MeatEntity
+@await Component.InvokeAsync(typeof(MeatItemComponent), Model)

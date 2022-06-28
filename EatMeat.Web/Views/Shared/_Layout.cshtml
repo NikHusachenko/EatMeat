@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EatMeat.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EatMeat.Web.styles.css" asp-append-version="true" />
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="~/assets/img/catclose.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="~/assets/img/icon.png">
+    <!-- ************************* CSS Files ************************* -->
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="~/assets/css/vendor.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="~/assets/css/main.css">
+
+</head>
+<body>
+    <!-- Preloader Start -->
+    <div class="ft-preloader active">
+        <div class="ft-preloader-inner h-100 d-flex align-items-center justify-content-center">
+            <div class="ft-child ft-bounce1"></div>
+            <div class="ft-child ft-bounce2"></div>
+            <div class="ft-child ft-bounce3"></div>
+        </div>
+    </div>
+    <!-- Preloader End -->
+
+    <div class="wrapper">
+        <!-- Header Start -->
+        <header class="header header-default site-header header-transparent">
+            <div class="header__outer">
+                <div class="header__inner header--fixed">
+                    <div class="container">
+                        <partial name="_NavbarPartial" />
+                    </div>
+                </div>
+                <div class="header-sticky-height"></div>
+            </div>
+        </header>
+        <!-- Header End -->
+
+        <!-- Breadcrumb area Start -->
+        <section class="page-title-area bg-color" data-bg-color="#f4f4f4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="page-title"></h1>
+                        <ul class="breadcrumb">
+                            <li class="current"><span></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumb area End -->
+
+        <div class="main-content-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- ************************* JS Files ************************* -->
+    <!-- jQuery JS -->
+    <script src="~/assets/js/vendor.js"></script>
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

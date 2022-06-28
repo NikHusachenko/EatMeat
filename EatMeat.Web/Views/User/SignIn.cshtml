@@ -1,0 +1,71 @@
+﻿<div class="main-content-wrapper">
+    <div class="page-content-inner pt--75 pb--80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 mb-sm--50">
+                    <div class="login-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="heading__tertiary mb--30">Login</h4>
+                            </div>
+                            <div class="col-md-6"><h4 id="errorLabel"></h4></div>
+                        </div>
+                        <form class="form form--login">
+                            <div class="form__group mb--20">
+                                <label class="form__label">Username <span class="required">*</span></label>
+                                <input type="text" class="form__input" id="login">
+                            </div>
+                            <div class="form__group mb--20">
+                                <label class="form__label">Password <span class="required">*</span></label>
+                                <input type="password" class="form__input" id="password">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 d-flex align-items-center mb--20">
+                                    <div class="form__group mr--30">
+                                        <input type="button" value="Log in" id="btn" class="btn btn-size-sm">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="forgot-pass">Don't have an account? Register <a href="@Url.Action("SignUp", "User")"><i>here</i></a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+$("#btn").on('click', () => {
+    let data = {
+        login: $("#login").val(),
+        password: $("#password").val(),
+    };
+
+    let jsonData = JSON.stringify(data);
+    document.getElementById('errorLabel').innerHTML = "Wait...";
+
+    $.ajax({
+        url: '@Url.Action("SignIn", "User")',
+        method: 'post',
+        data: jsonData,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: (response) => {
+            location.href = response.responseMessage;
+        },
+        error: (response) => {
+            document.getElementById('errorLabel').innerHTML = response.responseJSON.responseMessage;
+        },
+    });
+
+    setTimeout(() => {
+        document.getElementById('errorLabel').innerHTML = "";
+    }, 5000);
+});
+</script>

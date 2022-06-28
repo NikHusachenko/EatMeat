@@ -1,0 +1,89 @@
+﻿@using EatMeat.Database.Entities
+@using EatMeat.Web.Models.Meat
+@model SettingsViewModel
+
+<div class="main-content-wrapper">
+    <div class="page-content-inner ptb--80 pt-md--40 pb-md--60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10 mb-md--50">
+                    <form class="cart-form" action="#">
+                        <div class="row no-gutters">
+                            <div class="col-12">
+                                <div class="table-content table-responsive">
+                                    @if(Model.Meats.Count == 0)
+                                    {
+                                        <h1>No one product</h1>
+                                    }
+                                    else
+                                    {
+                                        <table class="table text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th class="text-left">Name</th>
+                                                    <th>Price</th>
+                                                    <th>Weight</th>
+                                                    <th>Type</th>
+                                                    <th>Source</th>
+                                                    <th>Buyer Id</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach(MeatEntity meat in Model.Meats)
+                                                {
+                                                    <tr>
+                                                        <td class="product-remove text-left"><a href="@Url.Action("Delete", "Meat", new {@id = @meat.Id})"><i class="flaticon-cross"></i></a></td>
+                                                        <td class="product-name text-left wide-column">
+                                                            <h3>
+                                                                <a href="@Url.Action("Details", "Meat", new {@id = @meat.Id})">@meat.Name</a>
+                                                            </h3>
+                                                        </td>
+                                                        <td class="product-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">$@meat.Price</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">@meat.Weight kg</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">@meat.Type.ToString()</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">@meat.Source.ToString()</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                @if(meat.UserFK == null)
+                                                                {
+                                                                    <span class="money">No buyed</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="money">@meat.UserFK</span>
+                                                                }
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                </div>  
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-ld-1"></div>
+            </div>
+        </div>
+    </div>
+</div>

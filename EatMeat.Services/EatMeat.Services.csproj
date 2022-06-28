@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EatMeat.Common\EatMeat.Common.csproj" />
+    <ProjectReference Include="..\EatMeat.Database\EatMeat.Database.csproj" />
+    <ProjectReference Include="..\EatMeat.EntityFramework\EatMeat.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,39 @@
+﻿@using EatMeat.Web.Models.Meat
+@model DetailsViewModel
+
+<div class="main-content-wrapper">
+    <div class="page-content-inner pt--80 pt-md--60">
+        <div class="container">
+            <div class="row no-gutters mb--80 mb-md--57">
+                <div class="col-xl-10 offset-xl-1 col-lg-10 product-main-details mt-md--50">
+                    <div class="product-summary pl-lg--30 pl-md--0">
+                        <h3 class="product-title mb--20">@Model.Meat.Name</h3>
+                        <p class="product-short-description mb--20">@Model.Meat.Description</p>
+                        <div class="product-price-wrapper mb--25">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <span class="money">$@Model.Meat.Price</span>
+                                    <br />
+                                    <span class="money">@Model.Meat.Weight kg</span>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="product-footer-meta">
+                                        <p><label>Type:</label>
+                                            <a href="shop.html">@Model.Meat.Type</a>
+                                        </p>
+                                        <p><label>Source:</label>
+                                            <a href="shop.html">@Model.Meat.Source</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-action mb--30">
+                            <a href="shop.html" class="btn btn-size-sm btn-shape-square">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

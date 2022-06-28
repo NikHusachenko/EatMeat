@@ -1,0 +1,22 @@
+﻿@using EatMeat.Web.Views.Shared.Components.MeatItemComponent
+@model MeatItemViewModel
+
+<div class="col-xl-6 col-md-6 col-sm-6 mb--50" style="border: solid 1px; border-radius: 5%; padding: 9px;">
+    <div class="payne-product-list">
+        <div class="product__inner">
+            <div>
+                <h3 class="product__title">
+                    <a href="@Url.Action("Details", "Meat", new {@id = @Model.Meat.Id})">@Model.Meat.Name</a>
+                </h3>
+                <div class="product__price">
+                    <span class="sign">$</span>
+                    <span class="money">@Model.Meat.Price</span>
+                </div>
+                <p>@Model.Meat.Description</p>  
+                <div class="d-flex product__list-action">
+                    <a href="@Url.Action("Buy", "Meat", new {@productId = @Model.Meat.Id, @buyerId = @Model.BuyerId})" class="btn btn-size-sm">Add To Cart</a>
+                </div>                                            
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+﻿@using EatMeat.Database.Entities
+@model List<MeatEntity>
+
+<div class="main-content-wrapper">
+    <div class="page-content-inner ptb--80 pt-md--40 pb-md--60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 mb-md--50">
+                    <form class="cart-form" action="#">
+                        <div class="row no-gutters">
+                            <div class="col-12">
+                                <div class="table-content table-responsive">
+                                    @if(Model.Count == 0)
+                                    {
+                                        <label>No one product in card. Click <i><a href="@Url.Action("Types", "Meat")">here</a></i> to show products</label>
+                                    }
+                                    else
+                                    {
+                                        <table class="table text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th class="text-left">Name</th>
+                                                    <th>Price</th>
+                                                    <th>Weight</th>
+                                                    <th>Type</th>
+                                                    <th>Source</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach(MeatEntity meat in Model)
+                                                {
+                                                    <tr>
+                                                        <td class="product-remove text-left"><a href="@Url.Action("Cancel", "Meat", new {@id = @meat.Id})"><i class="flaticon-cross"></i></a></td>
+                                                        <td class="product-name text-left wide-column">
+                                                            <h3>
+                                                                <a href="#">@meat.Name</a>
+                                                            </h3>
+                                                        </td>
+                                                        <td class="product-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">$@meat.Price</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">@meat.Weight kg</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">@meat.Type.ToString()</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="product-total-price">
+                                                            <span class="product-price-wrapper">
+                                                                <span class="money">@meat.Source.ToString()</span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="row no-gutters border-top pt--20 mt--20">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6 text-sm-right">
+                                <button type="submit" class="cart-form__btn">Clear Cart</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-3">
+                    <div class="cart-collaterals">
+                        <div class="cart-totals">
+                            <h5 class="font-size-14 font-bold mb--15">Cart totals</h5>
+                            <div class="cart-calculator">
+                                <div class="cart-calculator__item">
+                                    <div class="cart-calculator__item--head">
+                                        <span>Sum of products: </span>
+                                    </div>
+                                    <div class="cart-calculator__item--value">
+                                        <span>@Model.Count</span>
+                                    </div>
+                                </div>
+                                <div class="cart-calculator__item order-total">
+                                    <div class="cart-calculator__item--head">
+                                        <span>Total</span>
+                                    </div>
+                                    <div class="cart-calculator__item--value">
+                                        <span class="product-price-wrapper">
+                                            <span class="money">$@Model.Sum(meat => meat.Price)</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("BuyAll", "User")" class="btn btn-size-md btn-shape-square btn-fullwidth">
+                            Buy all
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

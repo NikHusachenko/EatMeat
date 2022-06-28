@@ -1,0 +1,127 @@
+﻿@using EatMeat.Web.Views.Shared.Components.NavbarComponent
+@model NavbarViewModel
+
+<div class="header__main">
+    <div class="header__col header__left">
+        <a href="@Url.Action("Index", "Home")" class="logo">
+            <h1>Eat Meat</h1>
+        </a>
+    </div>
+    <div class="header__col header__center">
+        <nav class="main-navigation d-none d-lg-block">
+            <ul class="mainmenu">
+                <li class="mainmenu__item menu-item-has-children position-relative">
+                    <a href="#" class="mainmenu__link">Products</a>
+                    <div class="inner-menu">
+                        <ul class="sub-menu">
+                            <li class="has-children">
+                                <a href="#">Meat types</a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="@Url.Action("Types", "Meat")">All types</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Types", "Meat", new {@type = 0})">Carcass</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Types", "Meat", new {@type = 1})">Meat Product</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Types", "Meat", new {@type = 2})">Premium</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="has-children">
+                                <a href="#">Meat source</a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat")">All sources</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 0})">Chicken</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 1})">Pork</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 2})">Beef</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 3})">Rabbit</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 4})">Horse</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 5})">Turkey</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 6})">Wild</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("Sources", "Meat", new {@source = 7})">Other</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            @if(Model.IsAdmin == true)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Create", "Meat")">Add new product</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Settings", "Meat")">Settings</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </li>
+                <li class="mainmenu__item menu-item-has-children position-relative">
+                    <a href="#" class="mainmenu__link">About us</a>
+                </li>
+                <li class="mainmenu__item">
+                    <a href="#" class="mainmenu__link">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="header__col header__right">
+        <div class="toolbar-item d-none d-lg-block">
+            @if(Model.IsAuthorize == true)
+            {
+                <a href="@Url.Action("SignOut", "User")" class="toolbar-btn">
+                    <span>Logout</span>
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("SignIn", "User")" class="toolbar-btn">
+                    <span>Login</span>
+                </a>
+            }
+        </div>
+        <div class="toolbar-item mini-cart-btn">
+            <a href="#" id="cartIco" class="toolbar-btn js-toolbar">
+                <span class="mini-cart-btn__icon">
+                    <i class="flaticon-bag"></i>
+                </span>
+                <sup class="mini-cart-btn__count">
+                    @if(Model.CartLength != null)
+                    {
+                        <label>@Model.CartLength</label>
+                    }
+                    else
+                    {
+                        <label>0</label>
+                    }
+                </sup>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+$("#cartIco").click(() => {
+    location.href = '@Url.Action("Cart", "User")'
+});
+</script>

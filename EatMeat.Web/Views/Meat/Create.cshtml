@@ -1,0 +1,106 @@
+﻿@using EatMeat.Database.Enums
+
+<!-- Main Content Wrapper Start -->
+<div class="main-content-wrapper">
+    <div class="page-content-inner pt--80 pt-md--60 pb--72 pb-md--60">
+        <div class="container">
+            <div class="row">
+                <!-- Checkout Area Start -->  
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="checkout-title mt--10 col-lg-6">
+                            <h2>Create new product</h2>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5 id="errorLabel"></h5>
+                        </div>
+                    </div>
+                    <div class="checkout-form">
+                        <form class="form form--checkout">
+                            <div class="form-row mb--20">
+                                <div class="form__group col-12">
+                                    <label class="form__label">Product name<span class="required">*</span></label>
+                                    <input type="text" id="name" class="form__input">
+                                </div>
+                            </div>
+                            <div class="form-row mb--20">
+                                <div class="form__group col-md-6 mb-sm--30">
+                                    <label class="form__label">Price<span class="required">*</span></label>
+                                    <input type="text" id="price" class="form__input">
+                                </div>
+                                <div class="form__group col-md-6">
+                                    <label class="form__label">Weight<span class="required">*</span></label>
+                                    <input type="text" id="weight" class="form__input">
+                                </div>
+                            </div>
+                            <div class="form-row mb--20">
+                                <div class="form__group col-6">
+                                    <label class="form__label">Meat type<span class="required">*</span></label>
+                                    <select id="type" class="form__input nice-select" asp-items="@Html.GetEnumSelectList<MeatTypes>()"></select>
+                                </div>
+                                <div class="form__group col-6">
+                                    <label class="form__label">Meat source<span class="required">*</span></label>
+                                    <select id="source" class="form__input nice-select" asp-items="@Html.GetEnumSelectList<MeatSource>()"></select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form__group col-12">
+                                    <label class="form__label">Description<span class="required">*</span></label>
+                                    <textarea class="form__input form__input--textarea" id="description" placeholder="Somethin"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4">
+                                    <input class="btn btn-size-md btn-fullwidth" type="button" id="btn" value="Create" />
+                                </div>
+                                <div class="col-lg-4"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+                <!-- Checkout Area End -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Content Wrapper Start -->
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+$("#btn").on('click', () => {
+    let data = {
+        name: $("#name").val(),
+        description: $("#description").val(),
+        price: $("#price").val(),
+        weight: $("#weight").val(),
+        type: document.getElementById('type').value,
+        source: document.getElementById('source').value,
+    };
+    
+    let jsonData = JSON.stringify(data);
+    let errorLabel = document.getElementById('errorLabel');
+    errorLabel.innerHTML = "Creating...";
+
+    $.ajax({
+        url: '@Url.Action("Create", "Meat")',
+        method: 'post',
+        data: jsonData,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: (response) => {
+            location.href = response.responseMessage;
+        },
+        error: (response) => {
+            errorLabel.innerHTML = response.responseJSON.responseMessage;
+        },
+    });
+
+    setTimeout(() => {
+        errorLabel.innerHTML = "";
+    }, 5000);
+});
+</script>
